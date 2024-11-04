@@ -1,3 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
 # Check if a commit message file was provided
 if [ -z "$1" ]; then
   echo "Error: No commit message file provided."
@@ -10,7 +13,7 @@ npx --no -- commitlint --edit "$1"
 if [ $? -eq 0 ]; then
   # Read the commit message
   commit_msg=$(cat "$1")
-  echo "Original commit message: $commit_msg"
+  echo "Original commit message: '$commit_msg'"
 
   # Define the Gitmoji based on commit type
   if echo "$commit_msg" | grep -q "^feat"; then
@@ -40,10 +43,11 @@ if [ $? -eq 0 ]; then
 
   echo "Using Gitmoji: $gitmoji"
 
-  # Insert Gitmoji after the type and colon in the commit message
-  commit_msg_with_gitmoji=$(echo "$commit_msg" | sed "s/^\(\w\+\):/\1: $gitmoji /")
-
-  echo "Updated commit message: $commit_msg_with_gitmoji"
+  # Attempt to modify the commit message
+  commit_msg_with_gitmoji=$(echo "$commit_msg" | sed "s/^\(\w\+\): \(.*\)/\1: $gitmoji \2/")
+  
+  # Output the modified commit message for debugging
+  echo "Updated commit message (before writing): '$commit_msg_with_gitmoji'"
 
   # Update the commit message file with the new message
   echo "$commit_msg_with_gitmoji" > "$1"
