@@ -13,7 +13,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 app = FastAPI()
 
 # Import and include routers
-from app.routes import hello, tiny_url, webhook
+from app.routers import hello, tiny_url, webhook
 
 app.include_router(hello.router)
 app.include_router(webhook.router)
