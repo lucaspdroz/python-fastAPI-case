@@ -43,7 +43,8 @@ if [ $? -eq 0 ]; then
   echo "Using Gitmoji: $gitmoji"
 
   # Attempt to modify the commit message
-  commit_msg_with_gitmoji=$(echo "$commit_msg" | sed -E "s/^(\\w+): (.*)/\\1: $gitmoji \\2/")
+  # Using a more explicit sed command
+  commit_msg_with_gitmoji=$(echo "$commit_msg" | sed -E "s/^([a-z]+): (.*)/\1: $gitmoji \2/")
   
   # Output the modified commit message for debugging
   echo "Updated commit message (before writing): '$commit_msg_with_gitmoji'"
