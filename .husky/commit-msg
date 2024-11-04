@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
 # Check if a commit message file was provided
 if [ -z "$1" ]; then
