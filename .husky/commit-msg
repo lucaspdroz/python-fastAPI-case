@@ -1,5 +1,4 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
 
 # Check if a commit message file was provided
 if [ -z "$1" ]; then
@@ -44,13 +43,16 @@ if [ $? -eq 0 ]; then
   echo "Using Gitmoji: $gitmoji"
 
   # Attempt to modify the commit message
-  commit_msg_with_gitmoji=$(echo "$commit_msg" | sed "s/^\(\w\+\): \(.*\)/\1: $gitmoji \2/")
+  commit_msg_with_gitmoji=$(echo "$commit_msg" | sed -E "s/^(\\w+): (.*)/\\1: $gitmoji \\2/")
   
   # Output the modified commit message for debugging
   echo "Updated commit message (before writing): '$commit_msg_with_gitmoji'"
 
   # Update the commit message file with the new message
   echo "$commit_msg_with_gitmoji" > "$1"
+
+  # Confirming the updated message has been written
+  echo "Final commit message written to file: '$(cat "$1")'"
 else
   exit 1
 fi
