@@ -65,4 +65,4 @@ Start the Application (with auto-reload)
 
 For better commits run [Husky](https://typicode.github.io/husky/)
 
-> git commit -m "[kind]: "
+> git commit -m "[commitlint-kind]: "
