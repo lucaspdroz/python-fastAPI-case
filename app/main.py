@@ -2,7 +2,6 @@
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from custom_annotatons.annotation import greet
 
 # Load environment variables from .env file
 load_dotenv()
@@ -19,9 +18,6 @@ from app.routes import hello, tiny_url, webhook
 app.include_router(hello.router)
 app.include_router(webhook.router)
 app.include_router(tiny_url.router)
-
-# Usage of custom Annotation (type checked)
-print(greet("Pacheco"))
 
 # To run the server
 if __name__ == "__main__":
