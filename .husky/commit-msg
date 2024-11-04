@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Check if a commit message file was provided
+if [ -z "$1" ]; then
+  echo "Error: No commit message file provided."
+  exit 1
+fi
+
+# Run commitlint to validate the commit message
+npx --no -- commitlint --edit "$1"
+
+if [ $? -eq 0 ]; then
+  # Read the commit message
+  commit_msg=$(cat "$1")
+
+  # Define the Gitmoji based on commit type
+  if echo "$commit_msg" | grep -q "^feat"; then
+      gitmoji="✨"
+  elif echo "$commit_msg" | grep -q "^fix"; then
+      gitmoji="🐛"
+  elif echo "$commit_msg" | grep -q "^chore"; then
+      gitmoji="🔧"
+  elif echo "$commit_msg" | grep -q "^style"; then
+      gitmoji="💄"
+  elif echo "$commit_msg" | grep -q "^build"; then
+      gitmoji="🚀"
+  elif echo "$commit_msg" | grep -q "^ci"; then
+      gitmoji="👷"
+  elif echo "$commit_msg" | grep -q "^perf"; then
+      gitmoji="⚡️"
+  elif echo "$commit_msg" | grep -q "^refactor"; then
+      gitmoji="🔨"
+  elif echo "$commit_msg" | grep -q "^test"; then
+      gitmoji="✅"
+  elif echo "$commit_msg" | grep -q "^docs"; then
+      gitmoji="📝"
+  else
+      echo "Commit type not mapped to Gitmoji. Verify the commit type."
+      exit 1
+  fi
+
+  # Insert Gitmoji after the type and colon in the commit message
+  commit_msg_with_gitmoji=$(echo "$commit_msg" | sed "s/^\(\w\+\):/\1: $gitmoji/")
+
+  # Update the commit message file with the new message
+  echo "$commit_msg_with_gitmoji" > "$1"
+else
+  exit 1
+fi

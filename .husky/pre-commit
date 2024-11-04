@@ -1,0 +1,7 @@
+echo '🟣🤘🏼 Checking.. the format and the types of your project before committing'
+
+echo "Running Black..."
+black .
+
+echo "Running Tests..."
+PYTHONPATH=./ pytest tests/*

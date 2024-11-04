@@ -1,0 +1,14 @@
+{
+  "name": "unicorn_backend",
+  "version": "1.0.0",
+  "description": "This is not a walkthrough, I'm just sharing my learning process.",
+  "scripts": {
+    "prepare": "husky || true"
+  },
+  "keywords": [],
+  "author": "Lucas Pacheco",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^9.1.6"
+  }
+}

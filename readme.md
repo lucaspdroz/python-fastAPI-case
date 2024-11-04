@@ -60,3 +60,9 @@ Install Requirements from a File
 Start the Application (with auto-reload)
 
 > uvicorn app.main:app --reload
+
+## Husky
+
+For better commits run [Husky](https://typicode.github.io/husky/)
+
+> git commit -m "[kind]: "

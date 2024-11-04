@@ -22,4 +22,5 @@ app.include_router(tiny_url.router)
 # To run the server
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
