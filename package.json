@@ -4,6 +4,7 @@
   "description": "This is not a walkthrough, I'm just sharing my learning process.",
   "scripts": {
     "prepare": "husky || true",
+    "start": "uvicorn app.main:app --reload",
     "bypass": "husky -n"
   },
   "keywords": [],
